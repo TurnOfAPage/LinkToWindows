@@ -37,6 +37,7 @@ jobs:
       - name: Build module with Gradle
         run: |
           chmod +x ./gradlew
+          ./gradlew :module:generateFetcherHeader --no-daemon
           ./gradlew :module:assembleModule --no-daemon --stacktrace
 
       - name: Collect artifact
@@ -79,7 +80,7 @@ jobs:
             echo "- 构建产物：LinkToWindows_v1.0-test.zip"
             echo "- 构建时间：$(date -u '+%Y-%m-%d %H:%M:%S UTC')"
             echo "- 构建环境：ubuntu-latest / JDK 21 / NDK 29.0.14206865 / Build Tools 37.0.0"
-            echo "- 构建命令：./gradlew :module:assembleModule"
+            echo "- 构建命令：./gradlew :module:generateFetcherHeader && ./gradlew :module:assembleModule"
             echo ""
             echo "## 变更内容（提交日志）"
             echo '```'
