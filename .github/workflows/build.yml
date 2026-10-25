@@ -43,7 +43,7 @@ jobs:
       - name: Collect artifact
         run: |
           mkdir -p output
-          cp module/build/outputs/module/*.zip output/LinkToWindows_v1.0-test.zip
+          cp module/build/outputs/module/*.zip output/LinkToWindows_v1.1-test.zip
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -75,12 +75,15 @@ jobs:
             echo "本版本由超级小爱 AI 通过 GitHub Actions 云端自动编译打包，仅作测试用途，请勿用于生产环境。"
             echo ""
             echo "## 版本信息"
-            echo "- 版本号：v1.0-test（1.0 测试版）"
-            echo "- 模块内部版本：v1.4 (versionCode 14)"
-            echo "- 构建产物：LinkToWindows_v1.0-test.zip"
+            echo "- 版本号：v1.1-test（1.1 测试版）"
+            echo "- 构建产物：LinkToWindows_v1.1-test.zip"
             echo "- 构建时间：$(date -u '+%Y-%m-%d %H:%M:%S UTC')"
             echo "- 构建环境：ubuntu-latest / JDK 21 / NDK 29.0.14206865 / Build Tools 37.0.0"
             echo "- 构建命令：./gradlew :module:generateFetcherHeader && ./gradlew :module:assembleModule"
+            echo ""
+            echo "## 本次变更"
+            echo "- 更新 zygisk.hpp 到官方最新 ZYGISK_API_VERSION 5（KernelSU / LSPosed ZygiskNext / Magisk Zygisk 共用 API，兼容 v4 模块接口）"
+            echo "- 支持架构检查：zygisk/arm64-v8a.so、injectrc、virtual_keyboard 均为 arm64 (aarch64)，无冗余架构，保持 arm64-v8a"
             echo ""
             echo "## 变更内容（提交日志）"
             echo '```'
@@ -96,8 +99,8 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.0-test
-          name: "v1.0-test (AI 编译测试)"
+          tag_name: v1.1-test
+          name: "v1.1-test (AI 编译测试)"
           prerelease: true
           body_path: release_body.md
           files: output/*.zip
