@@ -28,7 +28,7 @@ jobs:
         run: |
           SDKMANAGER=$(ls "$ANDROID_HOME"/cmdline-tools/*/bin/sdkmanager | head -1)
           yes | "$SDKMANAGER" --licenses > /dev/null 2>&1 || true
-          if ! "$SDKMANAGER" --channel=3 --install "platforms;android-37" "build-tools;37.0.0" "ndk;29.0.14206865"; then
+          if ! "$SDKMANAGER" --channel=3 --install "platforms;android-37.0" "build-tools;37.0.0" "ndk;29.0.14206865"; then
             echo "=== Install failed. Available matching packages: ==="
             "$SDKMANAGER" --list --channel=3 | grep -E "platforms;android-3[5-9]|build-tools;3[5-9]|ndk;2[89]" || true
             exit 1
